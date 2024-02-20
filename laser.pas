@@ -6,6 +6,7 @@ uses
 type
   TipoClase = (Primera, Segunda, Tercera);
   TipoViaje = (Internacional, Nacional);
+  TipoServicioEspecial = (Ninguno, ComidaEspecial, AsistenciaEspecial);
 
 var
   opcion: char;
@@ -14,6 +15,7 @@ var
   clase: TipoClase;
   viaje: TipoViaje;
   costo: real;
+  servicioEspecial: TipoServicioEspecial;
 
 begin
   repeat
@@ -48,7 +50,22 @@ begin
              writeln('2. Nacional');
              readln(opcion);
              case opcion of
-               '1': viaje := Internacional;
+               '1': begin
+                      viaje := Internacional;
+                      writeln('Seleccione su vuelo internacional:');
+                      writeln('1. Bogota - Caracas / Caracas - Bogota - $499');
+                      writeln('2. Curazao - Caracas / Caracas - Curazao - $400');
+                      writeln('3. Santo Domingo - Caracas / Caracas - Santo Domingo - $700');
+                      writeln('4. La Romana - Caracas / Caracas - La Romana - $650');
+                      readln(opcion);
+                      case opcion of
+                        '1': costo := 499;
+                        '2': costo := 400;
+                        '3': costo := 700;
+                        '4': costo := 650;
+                      end;
+                      writeln('Boleto comprado exitosamente. Costo: $', costo:0:2);
+                    end;
                '2': begin
                       viaje := Nacional;
                       writeln('Seleccione su vuelo nacional:');
@@ -70,6 +87,18 @@ begin
                       writeln('Boleto comprado exitosamente. Costo: $', costo:0:2);
                     end;
              end;
+
+             writeln('¿Necesita algún tipo de servicio especial?');
+             writeln('1. Comida Especial');
+             writeln('2. Asistencia Especial');
+             writeln('3. Ninguno');
+             readln(opcion);
+             case opcion of
+               '1': servicioEspecial := ComidaEspecial;
+               '2': servicioEspecial := AsistenciaEspecial;
+               '3': servicioEspecial := Ninguno;
+             end;
+             writeln('Servicio especial seleccionado.');
            end;
       '2': writeln('Mostrando sistema...');
       '3': writeln('Saliendo del programa...');
